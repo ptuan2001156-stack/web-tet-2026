@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Năm Mới 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;700&display=swap');
+
+        body {
+            margin: 0; padding: 0; background: #000; overflow: hidden;
+            font-family: 'Poppins', sans-serif; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .bg-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(60,0,0,0.3) 0%, rgba(0,0,0,1) 90%);
+            z-index: 1; pointer-events: none;
+        }
+
+        canvas { position: absolute; top: 0; left: 0; z-index: 0; }
+
+        /* --- DÒNG CHỮ CHẠY --- */
+        .marquee-top-container {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: linear-gradient(90deg, #b71c1c, #d32f2f, #b71c1c); 
+            z-index: 3000; padding: 10px 0;
+            border-bottom: 2px solid #ffd700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .marquee-top-content {
+            display: inline-block; white-space: nowrap;
+            color: #ffd700; font-size: 1.3rem; font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px #000;
+            animation: scroll-left 30s linear infinite; padding-left: 100%;
+        }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        /* --- BAO LÌ XÌ --- */
+        .lixi-container { 
+            position: relative; z-index: 50; cursor: pointer; 
+            transition: transform 0.3s; 
+        }
+        .lixi-container:hover { transform: scale(1.1) rotate(2deg); }
+        
+        .envelope {
+            width: 200px; height: 300px;
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            border-radius: 15px; border: 4px solid #ffd700;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            animation: shake 3s infinite ease-in-out;
+        }
+        .lixi-text {
+            font-family: 'Dancing Script', cursive; color: #ffd700;
+            font-size: 50px; font-weight: bold; text-align: center;
+            text-shadow: 2px 2px 0px #800000; margin-bottom: 10px;
+        }
+        .lixi-icon { font-size: 60px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); }
+        
+        @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(2deg); } 75% { transform: rotate(-2deg); } }
+
+        /* --- THẦN TÀI KHU VỰC --- */
+        .god-container {
+            position: fixed; bottom: -100%; left: 50%; transform: translateX(-50%);
+            z-index: 2000; display: flex; flex-direction: column; align-items: center;
+            transition: bottom 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .god-avatar {
+            font-size: 160px; line-height: 1; position: relative;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1));
+            animation: bounceGod 2s infinite ease-in-out; cursor: pointer;
+        }
+        .god-avatar::after { content: "💰"; position: absolute; bottom: 0; right: -20px; font-size: 80px; }
+        @keyframes bounceGod { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        .speech-bubble {
+            background: #fff; padding: 20px; border-radius: 20px; border: 5px solid #d00000;
+            margin-bottom: 20px; width: 320px; text-align: center; position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.5s;
+        }
+        .speech-bubble::after {
+            content: ''; position: absolute; bottom: -20px; left: 50%;
+            border-width: 20px 20px 0; border-style: solid;
+            border-color: #d00000 transparent; display: block; width: 0; transform: translateX(-50%);
+        }
+        .wish-text { font-family: 'Dancing Script', cursive; color: #d00000; font-size: 1.8rem; font-weight: bold; line-height: 1.4; }
+
+        /* --- NGỰA CHẠY --- */
+        .running-horse {
+            position: fixed; bottom: 50px; left: -300px; z-index: 100;
+            font-size: 150px; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+            transform: scaleX(-1);
+            animation: runAcross linear forwards; pointer-events: none; user-select: none;
+        }
+        @keyframes runAcross { 0% { left: -300px; transform: scaleX(-1); } 100% { left: 120vw; transform: scaleX(-1); } }
+
+        .falling-money {
+            position: fixed; top: -50px; z-index: 900;
+            font-size: 40px; animation: fall linear forwards; user-select: none;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        .music-icon {
+            position: fixed; bottom: 20px; right: 20px; z-index: 4000;
+            font-size: 40px; color: #ffd700;
+            background: rgba(0,0,0,0.5); width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            border: 2px solid #ffd700; cursor: pointer;
+            animation: spin 3s linear infinite; display: none;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .footer-marquee { position: fixed; bottom: 10px; width: 100%; text-align: center; color: #ffeb3b; font-size: 0.9rem; z-index: 60; opacity: 0.7; }
+    </style>
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <canvas id="fireworks"></canvas>
+
+    <div class="marquee-top-container">
+        <div class="marquee-top-content">
+            🐎 CHÚC MỪNG NĂM MỚI BÍNH NGỌ 2026 - TẤN TÀI TẤN LỘC - MÃ ĐÁO THÀNH CÔNG 🌸
+        </div>
+    </div>
+
+    <div class="lixi-container" onclick="openGift()">
+        <div class="envelope">
+            <div class="lixi-text">LÌ XÌ<br>2026</div>
+            <div class="lixi-icon">🐎</div>
+        </div>
+    </div>
+
+    <div class="god-container" id="godArea">
+        <div class="speech-bubble" id="bubble">
+            <span class="wish-text" id="typewriter"></span>
+        </div>
+        <div class="god-avatar">👲</div>
+    </div>
+
+    <div class="music-icon" id="musicIcon" onclick="toggleMusic()">🎵</div>
+    <div class="footer-marquee">Design by Lưu Nhất Định - 2026</div>
+
+    <audio id="bgMusic" loop>
+        <source src="1.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="horseSound" src="https://www.myinstants.com/media/sounds/horse-whinny.mp3"></audio>
+
+    <script>
+        let isIntense = false;
+
+        function openGift() {
+            document.querySelector('.lixi-container').style.display = 'none';
+            const godArea = document.getElementById('godArea');
+            godArea.style.bottom = "20px"; 
+
+            setTimeout(() => {
+                document.getElementById('bubble').style.opacity = '1';
+                typeWriterEffect("Chúc bạn năm Bính Ngọ:\nTiền vàng đầy hũ,\nHạnh phúc đủ đầy,\nMã đáo thành công! 🐎💰");
+            }, 800);
+
+            const music = document.getElementById('bgMusic');
+            const musicIcon = document.getElementById('musicIcon');
+            music.volume = 0.8; 
+            
+            var playPromise = music.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    musicIcon.style.display = 'flex';
+                })
+                .catch(error => {
+                    console.log("Lỗi nhạc: " + error);
+                    // Nếu lỗi, thử hiển thị thông báo để biết
+                    alert("Chưa thấy file nhạc! Hãy đảm bảo tên file nhạc là '1' và nằm cùng thư mục.");
+                });
+            }
+
+            const horseSnd = document.getElementById('horseSound');
+            horseSnd.volume = 0.5; horseSnd.play().catch(() => {});
+            
+            isIntense = true;
+            startEffects();
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const icon = document.getElementById('musicIcon');
+            if (music.paused) {
+                music.play();
+                icon.style.animationPlayState = 'running';
+                icon.style.opacity = '1';
+            } else {
+                music.pause();
+                icon.style.animationPlayState = 'paused';
+                icon.style.opacity = '0.5';
+            }
+        }
+
+        function typeWriterEffect(text) {
+            const element = document.getElementById('typewriter');
+            let i = 0; element.innerHTML = "";
+            function type() {
+                if (i < text.length) {
+                    if (text.charAt(i) === '\n') element.innerHTML += '<br>';
+                    else element.innerHTML += text.charAt(i);
+                    i++; setTimeout(type, 60); 
+                }
+            } type();
+        }
+
+        function startEffects() {
+            let moneyInterval = setInterval(createMoney, 150);
+            setTimeout(() => clearInterval(moneyInterval), 8000);
+            for(let i=0; i<8; i++) { setTimeout(createRunningHorse, i * 800); }
+        }
+
+        function createRunningHorse() {
+            const horse = document.createElement('div');
+            horse.innerText = "🐎"; horse.className = 'running-horse';
+            const size = Math.random() * 80 + 120; horse.style.fontSize = size + 'px';
+            horse.style.bottom = (Math.random() * 200 + 50) + 'px'; 
+            horse.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(horse);
+            setTimeout(() => horse.remove(), 6000);
+        }
+
+        function createMoney() {
+            const money = document.createElement('div');
+            const types = ['💵','💰','💎','🧧'];
+            money.innerText = types[Math.floor(Math.random()*types.length)];
+            money.className = 'falling-money';
+            money.style.left = Math.random() * 100 + 'vw';
+            money.style.fontSize = (Math.random() * 30 + 30) + 'px';
+            money.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(money);
+            setTimeout(() => money.remove(), 5000);
+        }
+
+        /* --- PHÁO HOA --- */
+        const canvas = document.getElementById('fireworks');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        const fireworks = [], particles = [];
+        function random(min, max) { return Math.random() * (max - min) + min; }
+        class Firework {
+            constructor() { this.x = random(width*0.2, width*0.8); this.y = height; this.targetY = random(height*0.1, height*0.4); this.speed = random(4, 8); this.hue = random(0, 360); }
+            update() { this.y -= this.speed; if (this.y <= this.targetY) { this.explode(); return false; } return true; }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, 3, 0, Math.PI*2); ctx.fillStyle = `hsl(${this.hue},100%,50%)`; ctx.fill(); }
+            explode() { const count = isIntense ? 80 : 40; for (let i=0; i<count; i++) particles.push(new Particle(this.x, this.y, this.hue)); }
+        }
+        class Particle {
+            constructor(x, y, hue) { this.x=x; this.y=y; this.hue=hue; const angle=random(0,Math.PI*2); const speed=random(1,6); this.vx=Math.cos(angle)*speed; this.vy=Math.sin(angle)*speed; this.alpha=1; this.gravity=0.05; this.decay=random(0.01,0.03); }
+            update() { this.vx*=0.96; this.vy*=0.96; this.vy+=this.gravity; this.x+=this.vx; this.y+=this.vy; this.alpha-=this.decay; return this.alpha>0; }
+            draw() { ctx.globalAlpha=this.alpha; ctx.beginPath(); ctx.arc(this.x, this.y, random(1,3), 0, Math.PI*2); ctx.fillStyle = `hsl(${this.hue},100%,70%)`; ctx.fill(); ctx.globalAlpha=1; }
+        }
+        function loop() {
+            ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.fillRect(0,0,width,height);
+            if (Math.random() < (isIntense ? 0.1 : 0.03)) fireworks.push(new Firework());
+            for (let i=fireworks.length-1; i>=0; i--) { fireworks[i].draw(); if (!fireworks[i].update()) fireworks.splice(i,1); }
+            for (let i=particles.length-1; i>=0; i--) { particles[i].draw(); if (!particles[i].update()) particles.splice(i,1); }
+            requestAnimationFrame(loop);
+        }
+        loop();
+    </script>
+</body>
+</html>
